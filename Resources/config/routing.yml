@@ -1,0 +1,3 @@
+pitech_mssql_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: PitechMssqlBundle:Default:index }
