@@ -140,4 +140,40 @@ class DblibPlatform extends SQLServer2005Platform
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    public function getDateTimeFormatString()
+    {
+        return $this->getDateTimeFormatByPhpVersion(__FUNCTION__);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getDateFormatString()
+    {
+        return $this->getDateTimeFormatByPhpVersion(__FUNCTION__);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getTimeFormatString()
+    {
+        return $this->getDateTimeFormatByPhpVersion(__FUNCTION__);
+    }
+
+    /**
+     * Return the correct datetime format depending on php version.
+     * @param string $function - the function name to be called on parent if php version is old.
+     * @return string - the date/datetime format
+     */
+    public function getDateTimeFormatByPhpVersion($function)
+    {
+        if (substr(phpversion(), 0, 3) >= '5.6') {
+            return 'Y-m-d H:i:s';
+        }
+        return parent::$function();
+    }
 }
