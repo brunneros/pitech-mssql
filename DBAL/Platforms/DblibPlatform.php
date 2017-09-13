@@ -171,7 +171,10 @@ class DblibPlatform extends SQLServer2005Platform
      */
     public function getDateTimeFormatByPhpVersion($function)
     {
-        if (substr(phpversion(), 0, 3) >= '5.6') {
+        $phpFixedVersion = '5.6.2';
+        $phpVersion = substr(phpversion(), 0, 5);
+        $phpVersionAsInt = str_replace('.', '', $phpVersion);
+        if ($phpVersionAsInt >= str_replace('.', '', $phpFixedVersion)) {
             return 'Y-m-d H:i:s';
         }
         return parent::$function();
